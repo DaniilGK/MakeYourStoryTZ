@@ -1,12 +1,13 @@
-import Phaser from 'phaser'
-import Welcome from './Welcome'
-import Game from './Game'
+import Phaser from "phaser"
+import intro from "./intro"
+import tutorial from "./tutorial"
+import gameScene from "./gameScene"
 
 const config = {
-  width: 800,
-  height: 600,
-  backgroundColor: 0x000000,
-  scene: [Welcome, Game]
+  type: Phaser.AUTO,
+  width: 600,
+  height: 900,
+  scene: [intro, tutorial, gameScene]
 }
 
 const game = new Phaser.Game(config)
