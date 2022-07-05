@@ -1,18 +1,24 @@
 let closet = ["blouse-card", "dress-card", "brown-bag-card", "blue-bag-card", "glasses-card", "choker-card", "necklace-card", "hawaii-card", "sea-card"];
 let stuff0, stuff1;
+let selectedCard;
 export default class GameScene extends Phaser.Scene {
     constructor() {
       super('gameScene')
     }
 
     preload() {
-      this.load.image("lexi-blouse", "assets/scale/scale-0.png");
-      this.load.image("lexi-dress", "assets/scale/scale-0.png");
-
       this.load.image("scale-0", "assets/scale/scale-0.png");
       this.load.image("scale-1", "assets/scale/scale-1.png");
       this.load.image("scale-2", "assets/scale/scale-2.png");
       this.load.image("scale-3", "assets/scale/scale-3.png");
+
+      this.load.image("blouse", "assets/characters/lexi-blouse.png");
+      this.load.image("dress", "assets/characters/lexi-dress.png");
+      this.load.image("blue-bag", "assets/clothes/blue-bag.png");
+      this.load.image("brown-bag", "assets/clothes/brown-bag.png");
+      this.load.image("glasses", "assets/clothes/glasses.png");
+      this.load.image("choker", "assets/clothes/choker.png");
+      this.load.image("necklace", "assets/clothes/necklace.png");
 
       this.load.image("brown-bag-card", "assets/select-an-item/brown-bag.png");
       this.load.image("blue-bag-card", "assets/select-an-item/blue-bag.png");
@@ -24,16 +30,17 @@ export default class GameScene extends Phaser.Scene {
 
       this.load.image("hawaii", "assets/bg/hawaii.png");
       this.load.image("sea", "assets/bg/sea.png");
+
+      this.load.image("paul", "assets/characters/paul.png")
     }
   
     create() {
-      creatFirstedObjects(this);
       startGame(this);
     }
 
     update() {
     }
-  }
+  };
 
   function creatFirstedObjects(sceneThis) {
     sceneThis.bg = sceneThis.add.image(0, 0, "room").setOrigin(0, 0);
@@ -48,7 +55,7 @@ export default class GameScene extends Phaser.Scene {
     stuff0 = closet[0];
     stuff1 = closet[1];
     sceneThis.stuff = [sceneThis.add.image(40, 560, `${stuff0}`).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setOrigin(0, 0)];
-  }
+  };
 
   function changeScale(sceneThis) {
     switch(sceneThis.countTaps) {
@@ -66,6 +73,36 @@ export default class GameScene extends Phaser.Scene {
       break;
       case 4:
         sceneThis.scale.destroy();
+      break;
+    }
+  };
+
+  function changeClothesLexi(index, sceneThis) {
+    selectedCard = sceneThis.stuff[index].texture.key.slice(0, sceneThis.stuff[index].texture.key.length - 5);
+    sceneThis.lexiContainer = sceneThis.add.container(110, 30);
+    switch(selectedCard) {
+      case "blouse":
+        sceneThis.lexi.destroy();
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+      break;
+      case "dress":
+        sceneThis.lexi.destroy();
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+      break;
+      case "brown-bag":
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+      break;
+      case "blue-bag":
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 100, `${selectedCard}`).setScale(1.8).setOrigin(0, 0));
+      break;
+      case "glasses":
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+      break;
+      case "choker":
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+      break;
+      case "necklace":
+        sceneThis.lexiContainer.add(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
       break;
     }
   };
@@ -101,23 +138,32 @@ export default class GameScene extends Phaser.Scene {
             stuff1 = closet[7];
             sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setOrigin(0, 0));
           break;
-          // case 4:
-          // break;
         };
       break;
     };
   };
 
+  function endGame(sceneThis) {
+    switch(sceneThis.countTaps) {
+      case 4:
+        // sceneThis.bg = sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0);
+        // sceneThis.lexiContainer.add(sceneThis.add.image(110, 30, "paul").setOrigin(0, 0));
+        // sceneThis.add.image(110, 30, "paul").setOrigin(0, 0);
+    }
+  };
 
 
   function startGame(sceneThis) {
+    creatFirstedObjects(sceneThis);
     sceneThis.countTaps = 0;
-    sceneThis.stuff.forEach(e => {
+    sceneThis.stuff.forEach((e, i) => {
       e.setInteractive();
       e.on("pointerdown", () => {
         sceneThis.countTaps += 1;
-        changeScale(sceneThis)
+        changeScale(sceneThis);
+        changeClothesLexi(i, sceneThis);
         changeCards(e, sceneThis);
+        endGame(sceneThis);
       });
     });
   };
