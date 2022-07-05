@@ -6,8 +6,8 @@ export default class Tutorial extends Phaser.Scene {
     preload() {
       this.load.image("dress-text", "assets/text/dress.png");
       this.load.image("lexi-1", "assets/characters/lexi-1.png");
-      this.load.image("stuff-0", "assets/select-an-item/blouse.png");
-      this.load.image("stuff-1", "assets/select-an-item/dress.png");
+      this.load.image("blouse-card", "assets/select-an-item/blouse.png");
+      this.load.image("dress-card", "assets/select-an-item/dress.png");
       this.load.image("hand", "assets/hand.png");
     }
   
@@ -24,8 +24,7 @@ export default class Tutorial extends Phaser.Scene {
       });
 
       this.lexi = this.add.image(110, 30, "lexi-1").setOrigin(0, 0);
-      this.stuff = [this.add.image(40, 560, "stuff-0").setOrigin(0, 0).setAlpha(0), this.add.image(310, 560, "stuff-1").setOrigin(0, 0).setAlpha(0)];
-      
+      this.stuff = [this.add.image(40, 560, "blouse-card").setOrigin(0, 0).setAlpha(0), this.add.image(310, 560, "dress-card").setOrigin(0, 0).setAlpha(0)];
       this.stuff.forEach(e => {
         this.tweens.add({
           targets: e,
@@ -64,21 +63,21 @@ export default class Tutorial extends Phaser.Scene {
               }
             });
           }, 300);
-          break;
-          case 510:
-            setTimeout(() => {
-              this.tweens.add({
-                targets: this.hand,
-                props: {
-                  x: {value: 670, duration: 550, ease: "Power1"},
-                  y: {value: 950, duration: 550, ease: "Power1"},
-                }
-              });
-            }, 200);
-            break;
-            case 670:
-              this.scene.start("gameScene");
-              break;
+        break;
+        case 510:
+          setTimeout(() => {
+            this.tweens.add({
+              targets: this.hand,
+              props: {
+                x: {value: 670, duration: 550, ease: "Power1"},
+                y: {value: 950, duration: 550, ease: "Power1"},
+              }
+            });
+          }, 200);
+        break;
+        case 670:
+          this.scene.start("gameScene");
+        break;
       }
     }
   }
