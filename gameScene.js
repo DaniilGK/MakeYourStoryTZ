@@ -64,20 +64,25 @@ export default class GameScene extends Phaser.Scene {
     switch(sceneThis.countTaps) {
       case 1:
         sceneThis.scale.destroy();
-        sceneThis.scale = sceneThis.scale = sceneThis.add.image(40, 30, "scale-1").setOrigin(0, 0);
+        sceneThis.scale = sceneThis.scale = sceneThis.add.image(40, 30, "scale-1").setAlpha(0).setOrigin(0, 0);
       break;
       case 2:
         sceneThis.scale.destroy();
-        sceneThis.scale = sceneThis.scale = sceneThis.add.image(40, 30, "scale-2").setOrigin(0, 0);
+        sceneThis.scale = sceneThis.scale = sceneThis.add.image(40, 30, "scale-2").setAlpha(0).setOrigin(0, 0);
       break;
       case 3:
         sceneThis.scale.destroy();
-        sceneThis.scale = sceneThis.scale = sceneThis.add.image(40, 30, "scale-3").setOrigin(0, 0);
+        sceneThis.scale = sceneThis.scale = sceneThis.add.image(40, 30, "scale-3").setAlpha(0).setOrigin(0, 0);
       break;
       case 4:
         sceneThis.scale.destroy();
       break;
     }
+    sceneThis.tweens.add({
+      targets: sceneThis.scale,
+      duration: 250,
+      alpha: 1,
+    });
   };
 
   function changeClothesLexi(index, sceneThis) {
@@ -85,35 +90,42 @@ export default class GameScene extends Phaser.Scene {
     switch(selectedCard) {
       case "blouse":
         sceneThis.lexi.destroy();
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "dress":
         sceneThis.lexi.destroy();
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "brown-bag":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "blue-bag":
-        outfit.push(sceneThis.add.image(0, 100, `${selectedCard}`).setScale(1.8).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 100, `${selectedCard}`).setAlpha(0).setScale(1.8).setOrigin(0, 0));
       break;
       case "glasses":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "choker":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "necklace":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "hawaii":
-        sceneThis.bg = sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0);
+        sceneThis.bg = sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0);
       break;
       case "sea":
-        sceneThis.bg = sceneThis.add.image(0, 0, `${selectedCard}`).setOrigin(0, 0);
+        sceneThis.bg = sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0);
       break;
     }
     sceneThis.lexiContainer = sceneThis.add.container(110, 30, outfit);
+    outfit.forEach(e => {
+      sceneThis.tweens.add({
+        targets: e,
+        duration: 250,
+        alpha: 1,
+      });
+    }); 
   };
 
   function changeCards(item, sceneThis) {
@@ -133,28 +145,40 @@ export default class GameScene extends Phaser.Scene {
             sceneThis.stuff = [];
             stuff0 = closet[2];
             stuff1 = closet[3];
-            sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setOrigin(0, 0));
+            sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setAlpha(.4).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setAlpha(.4).setOrigin(0, 0));
           break;
           case 2:
             sceneThis.stuff = [];
             stuff0 = closet[4];
             stuff1 = closet[5];
-            sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setOrigin(0, 0));
+            sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setAlpha(.4).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setAlpha(.4).setOrigin(0, 0));
           break;
           case 3:
             sceneThis.stuff = [];
             stuff0 = closet[6];
             stuff1 = closet[7];
-            sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setOrigin(0, 0));
+            sceneThis.stuff.push(sceneThis.add.image(40, 560, `${stuff0}`).setAlpha(.4).setOrigin(0, 0), sceneThis.add.image(310, 560, `${stuff1}`).setAlpha(.4).setOrigin(0, 0));
           break;
         };
       break;
     };
+    sceneThis.stuff.forEach(e => {
+      sceneThis.tweens.add({
+        targets: e,
+        duration: 250,
+        alpha: 1,
+      });
+    })
   };
 
   function endGame(sceneThis) {
     switch(sceneThis.countTaps) {
       case 4:
+        sceneThis.tweens.add({
+          targets: sceneThis.bg,
+          duration: 250,
+          alpha: 1,
+        })
         delete sceneThis.stuff;
         sceneThis.tweens.add({
           targets: sceneThis.add.image(310, 0, "paul").setDepth(1).setOrigin(0, 0),
@@ -186,7 +210,6 @@ export default class GameScene extends Phaser.Scene {
         }, 300);
     }
   };
-
 
   function startGame(sceneThis) {
     creatFirstedObjects(sceneThis);
