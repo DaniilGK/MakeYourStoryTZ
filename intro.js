@@ -10,9 +10,23 @@ export default class Intro extends Phaser.Scene {
       this.load.image("lexi",  "assets/characters/lexi-0.png");
       this.load.image("paul-text", "assets/text/paul-text-0.png")
       this.load.image("lexi-text", "assets/text/lexi-text.png");
+
+      this.load.audio("shared-music", "assets/shared-music.mp3");
     }
   
     create() {
+      this.music = this.sound.add("shared-music");
+        let musicConfig = {
+            mute: false,
+            volume: 0.1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0,
+        };
+      this.music.play(musicConfig);
+
       this.add.image(0, 0, "room").setOrigin(0, 0);
       this.add.image(0, 0, "shadow").setOrigin(0, 0);
       this.paul = this.add.image(-30, -30, "paul").setOrigin(0, 0).setScale(1.2);
