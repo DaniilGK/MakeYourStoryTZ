@@ -40,9 +40,6 @@ export default class GameScene extends Phaser.Scene {
     create() {
       startGame(this);
     }
-
-    update() {
-    }
   };
 
   function creatFirstedObjects(sceneThis) {
@@ -97,19 +94,19 @@ export default class GameScene extends Phaser.Scene {
         outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "brown-bag":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(45, 120, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "blue-bag":
-        outfit.push(sceneThis.add.image(0, 100, `${selectedCard}`).setAlpha(0).setScale(1.8).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(0, 120, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "glasses":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(135, 80, `${selectedCard}`).setAlpha(0).setScale(.6).setOrigin(0, 0));
       break;
       case "choker":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(120, 185, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
       break;
       case "necklace":
-        outfit.push(sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0));
+        outfit.push(sceneThis.add.image(130, 230, `${selectedCard}`).setAlpha(0).setScale(.6).setOrigin(0, 0));
       break;
       case "hawaii":
         sceneThis.bg = sceneThis.add.image(0, 0, `${selectedCard}`).setAlpha(0).setOrigin(0, 0);

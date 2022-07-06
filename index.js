@@ -7,7 +7,7 @@ const config = {
   type: Phaser.AUTO,
   width: 600,
   height: 900,
-  scene: [intro, tutorial, gameScene]
+  scene: [intro, tutorial, gameScene],
 }
 
 const game = new Phaser.Game(config)
